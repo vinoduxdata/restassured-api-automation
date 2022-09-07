@@ -1,27 +1,39 @@
 package mavpro;
 
 import org.testng.Assert;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
 import io.restassured.response.Response;
+import static io.restassured.RestAssured.given;
 
-public class GetRestapi {
+public class testRestapi {
 	
-	@Test
-	void test() {
-		
-	Response	response=RestAssured.get("http://localhost:8080/book");
+	@BeforeTest
+    public static void setup() {
+        RestAssured.baseURI = "http://localhost:8080";
+    }
+
+    @Test
+    public void getRequest() {
+        Response response = given()
+                .contentType(ContentType.JSON)
+                .when()
+                .get("/book")
+                .then()
+                .extract().response();
+
+         System.out.println(response.asString());
+
+        Assert.assertEquals(200, response.statusCode());
 	
-	
-	Assert.assertEquals(200, response.getStatusCode());
-	
-	System.out.println(response.asString());
-	System.out.println(response.getContentType());
-	System.out.println(response.getStatusCode());
-	System.out.println(response.getTime());
-	System.out.println(response.getBody());
-		
-	}
 
 }
+}
+
+
+
+
+
