@@ -32,5 +32,6 @@ public class PutRestApi {
 	                .then()
 	                .extract().response();
 	        System.out.println(response.asString());
+		 Assert.assertEquals(200, response.statusCode());    
 }
 }
