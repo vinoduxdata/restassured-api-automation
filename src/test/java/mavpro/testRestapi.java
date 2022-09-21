@@ -17,7 +17,7 @@ public class testRestapi {
     }
 
     @Test
-    public void getRequest() {
+    public void getRequest() {          //get request
         Response response = given()
                 .contentType(ContentType.JSON)
                 .when()
